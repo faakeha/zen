@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "258733539348",
+    "project_id": "project-zen-30a4c",
+    "storage_bucket": "project-zen-30a4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258733539348:android:d263a472c4f44c6655e701",
+        "android_client_info": {
+          "package_name": "com.example.zen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258733539348-139f72gsudj5ab6qbfmrag70rpa5it31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUKM70J4FnewI-B_IOC7bXsNNkJlPybzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258733539348-139f72gsudj5ab6qbfmrag70rpa5it31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
