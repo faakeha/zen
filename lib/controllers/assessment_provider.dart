@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:zen/models/assessment_json.dart';
 import 'package:zen/repositories/assessment_repo.dart';
@@ -9,6 +11,9 @@ class AssessmentProvider with ChangeNotifier {
 
   Future<void> getProductsList() async {
     json_list = await _assessmentRepo.getList();
+    for(var item in json_list){
+      print(item.symptomsResponse);
+    }
     notifyListeners();
   }
 

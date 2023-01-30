@@ -11,7 +11,8 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MultiProvider(
       providers: [
-      ChangeNotifierProvider(create: (_) => AssessmentProvider()), ]
+      ChangeNotifierProvider(create: (_) => AssessmentProvider()), ],
+    child: MyApp(),
   ));
 }
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Blogs(),
+      home: Assessment(),
     );
   }
 }

@@ -20,7 +20,6 @@ class _AssessmentState extends State<Assessment> {
   int currentQuestionIndex = 0;
   int final_score = 0;
   List<int> scores = [];
-  Future<List<AssessmentJson>> json_list = [] as Future<List<AssessmentJson>>;
   Answer? selectedAnswer;
   final List<Answer> answerListSymptoms = [
     Answer("Never", 0),
@@ -29,6 +28,13 @@ class _AssessmentState extends State<Assessment> {
     Answer("Very Often", 3),
   ];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    WidgetsBinding.instance.addPostFrameCallback((_) async => {
+    await context.read<AssessmentProvider>().getProductsList()
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
