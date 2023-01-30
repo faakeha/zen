@@ -16,4 +16,12 @@ class AssessmentJson {
         "symptomsTotal": symptomsTotal,
         "performanceAverage": performanceAverage,
       };
+  static AssessmentJson fromJson(Map<String, dynamic> json) => AssessmentJson(
+        symptomsResponse:
+            List<int>.from(json["symptomsResponse"].map((x) => x)),
+        performanceResponse:
+            List<int>.from(json["performanceResponse"].map((x) => x)),
+        symptomsTotal: json["symptomsTotal"],
+        performanceAverage: json["performanceAverage"],
+      );
 }
