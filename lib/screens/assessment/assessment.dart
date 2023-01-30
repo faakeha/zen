@@ -1,6 +1,10 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zen/controllers/assessment_provider.dart';
 import 'package:zen/models/assessment_json.dart';
+import 'package:provider/provider.dart';
 
 import 'components/question_model.dart';
 
@@ -25,8 +29,11 @@ class _AssessmentState extends State<Assessment> {
     Answer("Very Often", 3),
   ];
 
+
   @override
   Widget build(BuildContext context) {
+    List<AssessmentJson> list = context.watch<AssessmentProvider>().json_list;
+
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -132,18 +139,9 @@ class _AssessmentState extends State<Assessment> {
     FirebaseFirestore.instance.collection("Assessment").add(aj.toJson());
   }
 
-  Future<List<AssessmentJson>> getList() async {
-    List<AssessmentJson> list = [];
-    await FirebaseFirestore.instance
-        .collection("Assessment")
-        .get()
-        .then((event) {
-      list = event.docs.map((e) => AssessmentJson.fromJson(e.data())).toList();
-    }).catchError((error) => print("Failed to fetch list. Error : ${error}"));
-    return list;
-  }
 
-  json_list = getList();
+
+
 
   _nextButton() {
     bool isLastQuestion = false;
