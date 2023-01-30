@@ -10,8 +10,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(
-      providers: [
-      ChangeNotifierProvider(create: (_) => AssessmentProvider()), ]
+    providers: [
+      ChangeNotifierProvider(create: (_) => AssessmentProvider()),
+    ],
+    child: MyApp(),
   ));
 }
 
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Blogs(),
+      home: Today(),
     );
   }
 }

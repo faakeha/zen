@@ -6,10 +6,11 @@ class AssessmentProvider with ChangeNotifier {
   List<AssessmentJson> json_list = [];
   final AssessmentRepo _assessmentRepo = AssessmentRepo();
 
-
   Future<void> getProductsList() async {
     json_list = await _assessmentRepo.getList();
+    for (var item in json_list) {
+      print(item.symptomsResponse);
+    }
     notifyListeners();
   }
-
 }
