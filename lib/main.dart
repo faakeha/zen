@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zen/controllers/assessment_provider.dart';
+import 'package:zen/controllers/blogs_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
 import 'package:zen/screens/today/today.dart';
@@ -11,7 +12,9 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MultiProvider(
       providers: [
-      ChangeNotifierProvider(create: (_) => AssessmentProvider()), ],
+      ChangeNotifierProvider(create: (_) => AssessmentProvider()),
+      ChangeNotifierProvider(create: (_) => BlogsProvider()),
+      ],
     child: MyApp(),
   ));
 }
@@ -36,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Assessment(),
+      home: Blogs(),
     );
   }
 }

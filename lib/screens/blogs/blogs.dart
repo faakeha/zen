@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
-import 'package:zen/screens/blogs/components/blog_card.dart';
+import 'package:provider/provider.dart';
+import 'package:zen/controllers/blogs_provider.dart';
+import 'package:zen/screens/blogs/components/blog_category.dart';
 
 class Blogs extends StatefulWidget {
   const Blogs({Key? key}) : super(key: key);
@@ -10,29 +13,26 @@ class Blogs extends StatefulWidget {
 
 class _BlogsState extends State<Blogs> {
   @override
+  void initState() {
+    // TODO: implement initState
+    WidgetsBinding.instance.addPostFrameCallback((_) async =>
+    {
+       await context.read<BlogsProvider>().setIsFetching(true),
+       await context.read<BlogsProvider>().getBlogsList(),
+       await context.read<BlogsProvider>().setIsFetching(false),
+    });
+    }
+
+  @override
   Widget build(BuildContext context) {
 
-    List<String> blogs = ["Blog 1sjfd skf kj jn skfj nss flk", "Blog 2", "Blog 3"];
+    List<String> categories = context.watch<BlogsProvider>().categories;
+
     return Scaffold(
       appBar: AppBar(title: Text("Blogs")),
       body: ListView(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Blog Category 1",
-            style: Theme.of(context).textTheme.headlineSmall,
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 200,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: blogs.map((e) => BlogCard(title: e,)).toList(),
-            ),
-          )
-        ],
+        children: categories.map((e) => BlogCategory(category: e,)).toList(),
       ),
-
     );
   }
 }
