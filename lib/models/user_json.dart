@@ -50,4 +50,20 @@ class UserJson {
         assesments: List<AssessmentJson>.from(json["assesments"].map((x) => x)),
         activities: List<ActivityJson>.from(json["activities"].map((x) => x)),
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "password": password,
+        "mobileNo": mobileNo,
+        "childName": childName,
+        "childAge": childAge,
+        "childGender": childGender,
+        "favblog": favblog,
+        "appointments": appointments,
+        "assesments": assesments,
+        "activities": activities
+      };
 }
