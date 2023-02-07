@@ -46,7 +46,6 @@ class Body extends StatelessWidget {
               );
             },
           ),
-          OrDivider(),
         ],
       ),
     );
