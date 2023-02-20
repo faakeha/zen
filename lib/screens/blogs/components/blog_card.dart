@@ -19,7 +19,6 @@ class _BlogCardState extends State<BlogCard> {
   @override
   Widget build(BuildContext context) {
     bool isFetching = context.watch<BlogsProvider>().isFetching;
-    print('isf, ${isFetching.toString()}');
 
     return isFetching ?
     SizedBox(

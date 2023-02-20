@@ -5,9 +5,10 @@ import 'package:zen/repositories/firebase_blogs_repository.dart';
 
 class BlogsProvider with ChangeNotifier {
   final FirebaseBlogsRepository _blogsRepository = FirebaseBlogsRepository();
+
   List<BlogJson> _blogs = [];
-  final List<String> _categories = [
-    "Favourite",
+   List<String> _categories = [
+    "Favourites",
     "General Information",
     "Helpful Tips to Manage Children",
     "Self-care Tips for Parents with ADHD Children",
@@ -15,17 +16,21 @@ class BlogsProvider with ChangeNotifier {
     "ADHD Impulsive/Hyperactive Type",
     "ADHD Combined Type"
   ];
-  List<BlogJson> _categoryBlogs = [];
   bool _isFetching = true;
+  String _searchText = '';
+  Map<String, List<BlogJson>> _list = {};
+  Map<String, List<BlogJson>> _flist = {};
 
   List<BlogJson> get blogs => _blogs;
-  List<String> get categories => _categories;
   bool get isFetching => _isFetching;
+  String get searchText => _searchText;
+  List<String> get categories => _categories;
+  Map<String, List<BlogJson>> get list => _list;
+  Map<String, List<BlogJson>> get flist => _flist;
 
   Future<void> setIsFetching(bool fetch) async {
     _isFetching = fetch;
     notifyListeners();
-    print('heka '+ _isFetching.toString());
   }
 
   Future<void> addBlog() async {
@@ -60,9 +65,30 @@ class BlogsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<BlogJson> getCategoryBlogs(String category) {
-    _categoryBlogs = _blogs.where((element) => element.category == category).toList();
+  void setSearchItem(String text) {
+    _searchText = text;
+    notifyListeners();
+  }
 
-    return _categoryBlogs;
+  setBlogs(){
+    for(var item in _categories){
+      _list[item] = _blogs.where((element) => element.category == item).toList();
+    }
+    _flist = _list;
+    notifyListeners();
+  }
+
+  getFilteredBlogs() {
+    Map<String, List<BlogJson>> filteredMap = {};
+
+    for(var item in _list.entries){
+      if(item.value.where((element) => element.title.toLowerCase().contains(searchText.toLowerCase())).toList().isNotEmpty){
+        filteredMap[item.key] = item.value.where((element) => element.title.toLowerCase().contains(searchText.toLowerCase())).toList();
+      }
+    }
+
+    _flist = filteredMap;
+    notifyListeners();
+
   }
 }

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zen/controllers/assessment_provider.dart';
 import 'package:zen/controllers/blogs_provider.dart';
+import 'package:zen/controllers/check_in_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
+import 'package:zen/screens/check_in/check_in.dart';
 import 'package:zen/screens/today/today.dart';
 
 void main() async {
@@ -14,6 +16,7 @@ void main() async {
       providers: [
       ChangeNotifierProvider(create: (_) => AssessmentProvider()),
       ChangeNotifierProvider(create: (_) => BlogsProvider()),
+      ChangeNotifierProvider(create: (_) => CheckInProvider()),
       ],
     child: MyApp(),
   ));
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Blogs(),
+      home: CheckIn(),
     );
   }
 }
