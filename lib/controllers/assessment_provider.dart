@@ -11,7 +11,7 @@ class AssessmentProvider with ChangeNotifier {
   Future<void> getProductsList() async {
     json_list = await _assessmentRepo.getList();
     for (var item in json_list) {
-      print(item.symptomsResponse);
+      print(item.symptomsTotal);
     }
     notifyListeners();
   }

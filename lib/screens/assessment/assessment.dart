@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:zen/controllers/assessment_provider.dart';
-import 'package:zen/models/assessment_json.dart';
-import 'package:provider/provider.dart';
 
+import '../../controllers/assessment_provider.dart';
+import '../../models/assessment_json.dart';
+import '../../repositories/assessment_repo.dart';
 import 'components/question_model.dart';
 
 class Assessment extends StatefulWidget {
@@ -17,9 +18,9 @@ class Assessment extends StatefulWidget {
 class _AssessmentState extends State<Assessment> {
   List<Question> questionList = getSymptomQuestions();
   int currentQuestionIndex = 0;
-  int final_score = 0;
+  double final_score = 0.0;
   List<int> scores = [];
-  Future<List<AssessmentJson>> json_list = [] as Future<List<AssessmentJson>>;
+  //Future<List<AssessmentJson>> json_list = [] as Future<List<AssessmentJson>>;
   Answer? selectedAnswer;
   final List<Answer> answerListSymptoms = [
     Answer("Never", 0),
@@ -27,6 +28,13 @@ class _AssessmentState extends State<Assessment> {
     Answer("Often", 2),
     Answer("Very Often", 3),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    WidgetsBinding.instance.addPostFrameCallback((_) async =>
+        {await context.read<AssessmentProvider>().getProductsList()});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,9 +141,24 @@ class _AssessmentState extends State<Assessment> {
         symptomsResponse: scores,
         performanceResponse: [],
         symptomsTotal: final_score,
-        performanceAverage: 0);
+        performanceAverage: 0,
+        date: DateTime.now());
     FirebaseFirestore.instance.collection("Assessment").add(aj.toJson());
   }
+
+  // _tryButton() async {
+  //   List<int> symptoms_total = [];
+  //   AssessmentRepo repo = AssessmentRepo();
+  //   List<AssessmentJson> x1;
+  //   x1 = await repo.getList() as List<AssessmentJson>;
+  //   for (var item in x1) {
+  //     symptoms_total.add(item.symptomsTotal);
+  //   }
+
+  //   for (var item in symptoms_total) {
+  //     print(item);
+  //   }
+  // }
 
   _nextButton() {
     bool isLastQuestion = false;
@@ -157,6 +180,7 @@ class _AssessmentState extends State<Assessment> {
           if (isLastQuestion) {
             //display score
             print(final_score);
+            //_tryButton();
             _saveScores();
             // showDialog(context: context, builder: (_) => _showScoreDialog());
           } else {
