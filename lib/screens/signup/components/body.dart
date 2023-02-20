@@ -44,8 +44,8 @@ class Body extends StatelessWidget {
           }),
           RoundedButton(
               text: "SIGN UP",
-              press: () {
-                user = context.read<SignUpProvider>().Signup(email!, password!);
+              press: () async {
+                user = await context.read<SignUpProvider>().Signup(email!, password!);
 
                 Navigator.push(
                   context,
