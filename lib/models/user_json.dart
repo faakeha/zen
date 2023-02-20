@@ -9,9 +9,9 @@ class UserJson {
   String? lastName;
   String? email;
   String? password;
-  String? mobileNo;
+  int? mobileNo;
   String? childName;
-  String? childAge;
+  int? childAge;
   String? childGender;
   List<String> favblog = [];
   List<MedicationJson> medications = [];
@@ -40,9 +40,9 @@ class UserJson {
         lastName: json["lastName"] as String? ?? '',
         email: json["email"] as String? ?? '',
         password: json["password"] as String? ?? '',
-        mobileNo: json["mobileNo"] as String? ?? '',
+        mobileNo: json["mobileNo"] as int? ?? 0,
         childName: json["childName"] as String? ?? '',
-        childAge: json["childAge"] as String? ?? '',
+        childAge: json["childAge"] as int? ?? 0,
         childGender: json["childGender"] as String? ?? '',
         favblog: List<String>.from(json["favblog"].map((x) => x)),
         appointments:

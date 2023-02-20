@@ -8,6 +8,7 @@ import 'package:zen/controllers/blogs_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
 import 'package:zen/screens/today/today.dart';
+import 'package:zen/controllers/Signup_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => AssessmentProvider()),
       ChangeNotifierProvider(create: (_) => BlogsProvider()),
+      ChangeNotifierProvider(create: (_) => SignUpProvider())
     ],
     child: MyApp(),
   ));
