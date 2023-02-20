@@ -1,23 +1,24 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:zen/screens/welcome/welcome_screen.dart';
+import 'package:zen/screens/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:zen/controllers/assessment_provider.dart';
 import 'package:zen/controllers/blogs_provider.dart';
-import 'package:zen/controllers/check_in_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
-import 'package:zen/screens/check_in/check_in.dart';
 import 'package:zen/screens/today/today.dart';
+import 'package:zen/controllers/Signup_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(
-      providers: [
+    providers: [
       ChangeNotifierProvider(create: (_) => AssessmentProvider()),
       ChangeNotifierProvider(create: (_) => BlogsProvider()),
-      ChangeNotifierProvider(create: (_) => CheckInProvider()),
-      ],
+      ChangeNotifierProvider(create: (_) => SignUpProvider())
+    ],
     child: MyApp(),
   ));
 }
@@ -29,20 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Zen',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primaryColor: primaryColorPeach,
+        scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
-      home: CheckIn(),
+      home: WelcomeScreen(),
     );
   }
 }
