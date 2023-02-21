@@ -5,9 +5,9 @@ import 'package:zen/components/AlreadyHaveAnAccount.dart';
 import 'package:zen/components/RoundedButton.dart';
 import 'package:zen/components/RoundedPasswordField.dart';
 import 'package:zen/components/RoundedTextField.dart';
-import 'package:zen/controllers/Signup_provider.dart';
+import 'package:zen/controllers/signup_provider.dart';
 import 'package:zen/screens/Login/login_screen.dart';
-import 'package:zen/screens/profile/profile_screen.dart';
+import 'package:zen/screens/complete_profile/complete_profile_screen.dart';
 import 'package:zen/screens/signup/components/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zen/components/AlreadyHaveAnAccount.dart';
@@ -37,26 +37,36 @@ class Body extends StatelessWidget {
           RoundedTextField(
               hintText: "Your Email",
               onChanged: (value) {
+                print(value);
                 email = value;
               }),
           RoundedPasswordField(onChanged: (value) {
+            print(value);
             password = value;
           }),
           RoundedButton(
               text: "SIGN UP",
               press: () async {
-                user = await context.read<SignUpProvider>().Signup(email!, password!);
+                try {
+                  user = await context
+                      .read<SignUpProvider>()
+                      .signup(email!, password!);
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ProfileScreen(
-                        user: user,
-                      );
-                    },
-                  ),
-                );
+                  if (user != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return CompleteProfileScreen(
+                            user: user,
+                          );
+                        },
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  print(e);
+                }
               }),
           SizedBox(
             height: size.height * 0.03,

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:zen/controllers/complete_profile_provider.dart';
 import 'package:zen/screens/welcome/welcome_screen.dart';
 import 'package:zen/screens/constants.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,7 @@ import 'package:zen/controllers/blogs_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
 import 'package:zen/screens/today/today.dart';
-import 'package:zen/controllers/Signup_provider.dart';
+import 'package:zen/controllers/signup_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,8 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => AssessmentProvider()),
       ChangeNotifierProvider(create: (_) => BlogsProvider()),
-      ChangeNotifierProvider(create: (_) => SignUpProvider())
+      ChangeNotifierProvider(create: (_) => SignUpProvider()),
+      ChangeNotifierProvider(create: (_) => CompleteProfileProvider())
     ],
     child: MyApp(),
   ));
