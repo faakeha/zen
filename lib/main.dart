@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:zen/controllers/check_in_provider.dart';
 import 'package:zen/controllers/complete_profile_provider.dart';
 import 'package:zen/controllers/login_provider.dart';
+import 'package:zen/screens/check_in/check_in.dart';
 import 'package:zen/screens/welcome/welcome_screen.dart';
 import 'package:zen/screens/constants.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +23,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => BlogsProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
+      ChangeNotifierProvider(create: (_) => CheckInProvider()),
       ChangeNotifierProvider(create: (_) => CompleteProfileProvider())
     ],
     child: MyApp(),
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColorPeach,
         scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
-      home: WelcomeScreen(),
+      home: CheckIn(),
     );
   }
 }
