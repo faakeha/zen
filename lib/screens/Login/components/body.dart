@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:zen/components/AlreadyHaveAnAccount.dart';
 import 'package:zen/components/RoundedButton.dart';
 import 'package:zen/components/TextFieldWidget.dart';
+import 'package:zen/controllers/login_provider.dart';
 //import 'package:zen/components/RoundedInputField.dart';
 //import 'package:zen/components/RoundedPasswordField.dart';
 import 'package:zen/screens/Login/components/background.dart';
@@ -17,6 +20,9 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String? email;
+    String? password;
+    User? user;
     return Background(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,11 +38,25 @@ class Body extends StatelessWidget {
             SizedBox(
               height: size.height * 0.03,
             ),
-            RoundedTextField(hintText: "Your Email", onChanged: (value) {}),
+            RoundedTextField(
+                hintText: "Your Email",
+                onChanged: (value) {
+                  print(value);
+                  email = value;
+                }),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                print(value);
+                password = value;
+              },
             ),
-            RoundedButton(text: "LOGIN", press: () {}),
+            RoundedButton(
+                text: "LOGIN",
+                press: () async {
+                  user = await context
+                      .read<LoginProvider>()
+                      .login(email!, password!);
+                }),
             SizedBox(
               height: size.height * 0.03,
             ),

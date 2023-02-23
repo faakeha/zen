@@ -7,15 +7,16 @@ import 'package:zen/repositories/user_repository.dart';
 class SignUpProvider with ChangeNotifier {
   final UserRepository _signuprepo = UserRepository();
 
-  Future<User?> Signup(String email, String password) async {
-    User result = await _signuprepo.signUp(email, password);
+  Future<User?> signup(String email, String password) async {
+    dynamic result = await _signuprepo.signUp(email, password);
     print("EM" + email);
     print("Pass" + password);
 
     if (result is User) {
       return result;
-    } else if (result is FirebaseAuthException) {
-      print("ERROR");
+    }
+    else if (result is FirebaseAuthException) {
+      print(result);
     }
     return null;
   }

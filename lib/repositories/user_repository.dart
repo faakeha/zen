@@ -43,4 +43,20 @@ class UserRepository {
       return e;
     }
   }
+
+  Future<User?> login(String email, String password) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseException catch (e) {
+      if (e.code == "user-not-found") {
+        print("No User found with this email and password");
+      }
+    }
+    return user;
+  }
 }
