@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/constants.dart';
+import 'package:zen/screens/dashboard/dashboard.dart';
+import 'package:zen/screens/dashboard/linechart.dart';
 
 class Today extends StatefulWidget {
   const Today({Key? key}) : super(key: key);
@@ -33,10 +35,13 @@ class _TodayState extends State<Today> {
                   borderRadius: BorderRadius.circular(30))),
         ),
         SizedBox(),
-        ElevatedButton(onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => Assessment()));
-        }, child: Text('Log symptoms'))
+        ElevatedButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Assessment()));
+            },
+            child: Text('Log symptoms')),
+        FlChartPage(),
       ]),
     );
   }
