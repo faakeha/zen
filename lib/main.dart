@@ -10,6 +10,7 @@ import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
 import 'package:zen/screens/today/today.dart';
 import 'package:zen/controllers/signup_provider.dart';
+import 'package:zen/controllers/google_sign_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,8 @@ void main() async {
       ChangeNotifierProvider(create: (_) => AssessmentProvider()),
       ChangeNotifierProvider(create: (_) => BlogsProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
-      ChangeNotifierProvider(create: (_) => CompleteProfileProvider())
+      ChangeNotifierProvider(create: (_) => CompleteProfileProvider()),
+      ChangeNotifierProvider(create: (_) => GoogleSignInProvider())
     ],
     child: MyApp(),
   ));

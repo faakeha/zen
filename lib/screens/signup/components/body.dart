@@ -9,15 +9,17 @@ import 'package:zen/controllers/signup_provider.dart';
 import 'package:zen/screens/Login/login_screen.dart';
 import 'package:zen/screens/complete_profile/complete_profile_screen.dart';
 import 'package:zen/screens/signup/components/background.dart';
+import 'package:email_auth/email_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zen/components/AlreadyHaveAnAccount.dart';
 
 class Body extends StatelessWidget {
+  String? email;
+  String? password;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    String? email;
-    String? password;
     User? user;
     return Background(
       child: Column(
@@ -68,6 +70,11 @@ class Body extends StatelessWidget {
                   print(e);
                 }
               }),
+          RoundedButton(
+              text: "SEND OTP",
+              press: () {
+                sendOTP();
+              }),
           SizedBox(
             height: size.height * 0.03,
           ),
@@ -87,6 +94,16 @@ class Body extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void sendOTP() async {
+    EmailAuth emailAuth = new EmailAuth(sessionName: "TestSession");
+    var res = await emailAuth.sendOtp(recipientMail: email!);
+    if (res) {
+      print("OTP Sent");
+    } else {
+      print("OTP Wasn't sent");
+    }
   }
 }
 
