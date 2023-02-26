@@ -5,6 +5,7 @@ import 'package:zen/controllers/check_in_provider.dart';
 import 'package:zen/controllers/complete_profile_provider.dart';
 import 'package:zen/controllers/login_provider.dart';
 import 'package:zen/screens/check_in/check_in.dart';
+import 'package:zen/screens/nav.dart';
 import 'package:zen/screens/welcome/welcome_screen.dart';
 import 'package:zen/screens/constants.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColorPeach,
         scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
-      home: CheckIn(),
+      home: NavBar(),
+      //CheckIn(),
     );
   }
 }
