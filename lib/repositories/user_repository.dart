@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:zen/models/user_json.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,11 +7,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 class UserRepository {
   final db = FirebaseFirestore.instance;
   FirebaseAuth fa = FirebaseAuth.instance;
+  UserJson _user = UserJson.empty();
 
   Future<void> addUser(UserJson newUser) async {
     await db
         .collection("Users")
-        .add(newUser.toJson())
+        .doc(newUser.id)
+        .set(newUser.toJson())
         .then((value) => print("User Added"))
         .catchError((error) => print('Error: ' + error));
   }
@@ -27,7 +31,7 @@ class UserRepository {
     await db
         .collection("Users")
         .doc(updateUser.id)
-        .set(updateUser.toJson())
+        .update(updateUser.toJson())
         .then((value) => print("User updated successfully"))
         .catchError((error) => print('Error: ' + error));
   }
@@ -38,6 +42,11 @@ class UserRepository {
       UserCredential userCred = await fa.createUserWithEmailAndPassword(
           email: email, password: password);
       user = userCred.user;
+      // Timer timer = Timer.periodic(Duration(seconds: 20), (timer) async {
+      //   print('20 secs done');
+      //   await user?.reload();
+      //   print('${fa.currentUser?.emailVerified.toString()!}CHECK EMAIL VERIFIED');
+      // });
       return user;
     } catch (e) {
       return e;
@@ -59,4 +68,17 @@ class UserRepository {
     }
     return user;
   }
+
+  Future<UserJson> getUser() async {
+    String? id = fa.currentUser?.uid;
+    print('ID$id');
+    await db.collection("Users").doc(id).get().then((event) {
+      _user = UserJson.fromJson(event.data() as Map<String, dynamic>, event.id);
+    }).catchError(
+            (error) => print("Failed to fetch user. Error : ${error}")); //
+
+    return _user;
+  }
+
+
 }

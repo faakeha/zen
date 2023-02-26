@@ -12,7 +12,14 @@ import 'package:zen/screens/signup/components/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zen/components/AlreadyHaveAnAccount.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  const Body({super.key});
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -52,7 +59,11 @@ class Body extends StatelessWidget {
                       .read<SignUpProvider>()
                       .signup(email!, password!);
 
-                  if (user != null) {
+                  // bool done = context.watch<SignUpProvider>().done;
+                  // if(done == false){
+                  //
+                  // }
+                  if(user != null){
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -63,6 +74,9 @@ class Body extends StatelessWidget {
                         },
                       ),
                     );
+                  }
+                  else{
+                    print('PLS VERFIY');
                   }
                 } catch (e) {
                   print(e);

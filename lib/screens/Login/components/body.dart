@@ -11,6 +11,7 @@ import 'package:zen/screens/Login/components/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zen/screens/constants.dart';
 import 'package:zen/screens/signup/signu_up_screen.dart';
+import 'package:zen/screens/today/today.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -53,9 +54,25 @@ class Body extends StatelessWidget {
             RoundedButton(
                 text: "LOGIN",
                 press: () async {
-                  user = await context
-                      .read<LoginProvider>()
-                      .login(email!, password!);
+                  try {
+                    user = await context
+                        .read<LoginProvider>()
+                        .login(email!, password!);
+
+                    if (user != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Today();
+                          },
+                        ),
+                      );
+                    }
+                  }
+                  catch(e){
+                    print(e);
+                  }
                 }),
             SizedBox(
               height: size.height * 0.03,

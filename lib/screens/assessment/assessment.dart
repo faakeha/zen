@@ -38,11 +38,12 @@ class _AssessmentState extends State<Assessment> {
   void initState() {
     // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((_) async =>
-        {await context.read<AssessmentProvider>().getProductsList()});
+        {await context.read<AssessmentProvider>().getUser()});
   }
 
   @override
   Widget build(BuildContext context) {
+    print('IN WIDGET${context.watch<AssessmentProvider>().user.id}');
     List<AssessmentJson> list = context.watch<AssessmentProvider>().json_list;
 
     final double height = MediaQuery.of(context).size.height;
@@ -142,13 +143,15 @@ class _AssessmentState extends State<Assessment> {
 
   void _saveScores() {
     final scoresList = scores;
+
     AssessmentJson aj = AssessmentJson(
         symptomsResponse: scores,
         performanceResponse: [],
         symptomsTotal: final_score,
         performanceAverage: 0,
         date: DateTime.now());
-    FirebaseFirestore.instance.collection("Assessment").add(aj.toJson());
+    context.read<AssessmentProvider>().addAssessment(aj);
+    // FirebaseFirestore.instance.collection("Assessment").add(aj.toJson());
   }
 
   // _tryButton() async {
