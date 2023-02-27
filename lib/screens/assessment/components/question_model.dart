@@ -6,10 +6,12 @@ class Question {
 }
 
 class Answer {
-  final String answerText;
-  final int score;
+  String answerText = "";
+  int score = 0;
+  int answer = 0;
 
   Answer(this.answerText, this.score);
+  Answer._(this.answer, this.score);
 }
 
 List<Question> getSymptomQuestions() {
@@ -180,21 +182,60 @@ List<Question> getSymptomQuestions() {
 
   return list;
 }
-// List<Question> getPerformanceQuestions() {
-//   List<Question> list = [
-//     Question("1. Overall school performance",),
-//     Question("2. Reading",),
-//     Question("3. Writing",),
-//     Question("4. Mathematics",),
-//     Question("5. Relationship with Parents",),
-//     Question("6. Relationship with Siblings",),
-//     Question("7. Relationship with Peers",),
-//     Question("8. Participation in organized activities (eg, teams)",),
 
-//   ];
-//   return list;
-
-// }
+List<Question> getPerformanceQuestions() {
+  List<Question> list = [
+    Question("1. Overall school performance", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+    Question("2. Reading", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+    Question("3. Writing", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+    Question("4. Mathematics", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+    Question("5. Relationship with Parents", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+    Question("6. Relationship with Siblings", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+    Question("7. Relationship with Peers", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+    Question("8. Participation in organized activities (eg, teams)", [
+      Answer._(1, 1),
+      Answer._(2, 2),
+      Answer._(3, 3),
+      Answer._(4, 4),
+    ]),
+  ];
+  return list;
+}
 /* [
       Answer("Never", 0),
       Answer("Occasionally", 1),
