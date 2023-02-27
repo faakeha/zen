@@ -40,8 +40,9 @@ dependencies:
   url_launcher: ^6.1.7
   like_button: ^2.0.5
   google_sign_in: ^6.0.1
+ 
+  
   fl_chart: ^0.60.0
-  fluttertoast: ^8.1.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -93,6 +94,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family:  MyFlutterApp
+      fonts:
+        - asset: assets/icons/MyFlutterApp.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
