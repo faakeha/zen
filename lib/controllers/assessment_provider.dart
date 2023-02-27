@@ -12,12 +12,18 @@ class AssessmentProvider with ChangeNotifier {
   final UserRepository _userRepository = UserRepository();
 
   UserJson _user = UserJson.empty();
+  bool _change = false;
 
   UserJson get user => _user;
+  bool get change => _change;
 
   Future<void> getUser() async {
     _user = await _userRepository.getUser();
     notifyListeners();
+  }
+
+  void setChange(){
+    _change = true;
   }
 
   // Future<void> getProductsList() async {
