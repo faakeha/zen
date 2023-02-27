@@ -14,6 +14,7 @@ class LoginProvider with ChangeNotifier {
     print("Pass" + password);
 
     if (result is User) {
+      print('THIS IS USER');
       return result;
     } else if (result is FirebaseAuthException) {
       print(result);

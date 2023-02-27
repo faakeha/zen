@@ -1,8 +1,10 @@
 class Question {
-  final String questionText;
-  final List<Answer> answersList;
+  String questionText = '';
+  List<Answer> answersList = [];
+  List<int> answers2List = [];
 
   Question(this.questionText, this.answersList);
+  Question._(this.questionText, this.answers2List);
 }
 
 class Answer {
