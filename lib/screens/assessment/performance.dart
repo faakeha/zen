@@ -14,7 +14,7 @@ import '../../repositories/assessment_repo.dart';
 import 'components/question_model.dart';
 
 class Performance extends StatefulWidget {
-   Performance({Key? key, required this.assessment}) : super(key: key);
+  Performance({Key? key, required this.assessment}) : super(key: key);
 
   AssessmentJson assessment;
   @override
@@ -22,24 +22,24 @@ class Performance extends StatefulWidget {
 }
 
 class _PerformanceState extends State<Performance> {
-  List<Question> questionList = getSymptomQuestions();
+  List<Question> questionList = getPerformanceQuestions();
   int currentQuestionIndex = 0;
   double final_score = 0.0;
   List<int> scores = [];
   //Future<List<AssessmentJson>> json_list = [] as Future<List<AssessmentJson>>;
   Answer? selectedAnswer;
-  final List<Answer> answerListSymptoms = [
-    Answer("Never", 0),
-    Answer("Occasionally", 1),
-    Answer("Often", 2),
-    Answer("Very Often", 3),
-  ];
+  // final List<Answer> answerListPerformance = [
+  //   Answer.withoutText(1, 1),
+  //   Answer.withoutText(2, 2),
+  //   Answer.withoutText(3, 3),
+  //   Answer.withoutText(4, 4),
+  // ];
 
   @override
   void initState() {
     // TODO: implement initState
-    WidgetsBinding.instance.addPostFrameCallback((_) async =>
-    {await context.read<AssessmentProvider>().getUser()});
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) async => {await context.read<AssessmentProvider>().getUser()});
   }
 
   @override
@@ -54,7 +54,7 @@ class _PerformanceState extends State<Performance> {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child:
-        Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           const Text(
             "Performance",
             style: TextStyle(
@@ -111,7 +111,7 @@ class _PerformanceState extends State<Performance> {
           .answersList
           .map(
             (e) => _answerButton(e),
-      )
+          )
           .toList(),
     );
   }
@@ -146,14 +146,11 @@ class _PerformanceState extends State<Performance> {
 
   Future<void> _saveScores() async {
     final scoresList = scores;
+    widget.assessment.performanceResponse = scoresList;
+    widget.assessment.performanceAverage = final_score / scoresList.length;
+    print(widget.assessment.performanceAverage);
 
-    AssessmentJson aj = AssessmentJson(
-        symptomsResponse: scores,
-        performanceResponse: [],
-        symptomsTotal: final_score,
-        performanceAverage: 0,
-        date: DateTime.now());
-    // context.read<AssessmentProvider>().addAssessment(aj);
+    context.read<AssessmentProvider>().addAssessment(widget.assessment);
     // FirebaseFirestore.instance.collection("Assessment").add(aj.toJson());
   }
 

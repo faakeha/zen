@@ -1,6 +1,6 @@
 class Question {
-   String questionText = '';
-   List<Answer> answersList = [];
+  String questionText = '';
+  List<Answer> answersList = [];
   List<int> answers2List = [];
 
   Question(this.questionText, this.answersList);
@@ -8,12 +8,11 @@ class Question {
 }
 
 class Answer {
-  final String answerText;
-  final int score;
+  String answerText = "";
+  int score = 0;
 
   Answer(this.answerText, this.score);
 }
-
 
 List<Question> getSymptomQuestions() {
   List<Question> list = [
@@ -183,20 +182,59 @@ List<Question> getSymptomQuestions() {
 
   return list;
 }
+
 List<Question> getPerformanceQuestions() {
   List<Question> list = [
-    Question._("1. Overall school performance", [1,2,3,4]),
-    Question._("2. Reading", [1,2,3,4]),
-    Question._("3. Writing",[1,2,3,4]),
-    Question._("4. Mathematics", [1,2,3,4]),
-    Question._("5. Relationship with Parents", [1,2,3,4]),
-    Question._("6. Relationship with Siblings", [1,2,3,4]),
-    Question._("7. Relationship with Peers", [1,2,3,4]),
-    Question._("8. Participation in organized activities (eg, teams)", [1,2,3,4]),
-
+    Question("1. Overall school performance", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
+    Question("2. Reading", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
+    Question("3. Writing", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
+    Question("4. Mathematics", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
+    Question("5. Relationship with Parents", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
+    Question("6. Relationship with Siblings", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
+    Question("7. Relationship with Peers", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
+    Question("8. Participation in organized activities (eg, teams)", [
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
+    ]),
   ];
   return list;
-
 }
 /* [
       Answer("Never", 0),
