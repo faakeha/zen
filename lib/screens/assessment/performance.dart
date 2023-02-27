@@ -181,26 +181,28 @@ class _PerformanceState extends State<Performance> {
         child: Text(isLastQuestion ? "Submit" : "Next"),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: Colors.blueAccent,
+          primary: selectedAnswer == null ? Colors.grey : Colors.blueAccent,
           onPrimary: Colors.white,
         ),
-        onPressed: () {
-          if (isLastQuestion) {
-            //display score
-            print(final_score);
-            // context.read<AssessmentProvider>().setChange();
-            //_tryButton();
-            _saveScores();
-            // showDialog(context: context, builder: (_) => _showScoreDialog());
-          } else {
-            //scores.add(selectedAnswer!.score);
-            //next question
-            setState(() {
-              selectedAnswer = null;
-              currentQuestionIndex++;
-            });
-          }
-        },
+        onPressed: selectedAnswer == null
+            ? null
+            : () async {
+                if (isLastQuestion) {
+                  //display score
+                  print(final_score);
+                  // context.read<AssessmentProvider>().setChange();
+                  //_tryButton();
+                  _saveScores();
+                  // showDialog(context: context, builder: (_) => _showScoreDialog());
+                } else {
+                  //scores.add(selectedAnswer!.score);
+                  //next question
+                  setState(() {
+                    selectedAnswer = null;
+                    currentQuestionIndex++;
+                  });
+                }
+              },
       ),
     );
   }
