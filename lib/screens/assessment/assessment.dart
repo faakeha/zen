@@ -26,14 +26,7 @@ class _AssessmentState extends State<Assessment> {
   int currentQuestionIndex = 0;
   double final_score = 0.0;
   List<int> scores = [];
-  //Future<List<AssessmentJson>> json_list = [] as Future<List<AssessmentJson>>;
   Answer? selectedAnswer;
-  final List<Answer> answerListSymptoms = [
-    Answer("Never", 0),
-    Answer("Occasionally", 1),
-    Answer("Often", 2),
-    Answer("Very Often", 3),
-  ];
 
   @override
   void initState() {
@@ -185,10 +178,11 @@ class _AssessmentState extends State<Assessment> {
         child: Text(isLastQuestion ? "Submit" : "Next"),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: Colors.blueAccent,
+          primary: selectedAnswer == null ? Colors.grey :Colors.blueAccent,
           onPrimary: Colors.white,
         ),
-        onPressed: () async {
+
+        onPressed: selectedAnswer == null ? null : () async {
           if (isLastQuestion) {
             //display score
             print(final_score);
