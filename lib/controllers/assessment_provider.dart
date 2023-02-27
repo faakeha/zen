@@ -36,9 +36,10 @@ class AssessmentProvider with ChangeNotifier {
       for(var item in user.assessments){
         assessments.add(item);
       }
+      assessments.add(assessment);
+      print('ADDED TO LIST');
     }
     else {
-
       assessments.add(assessment);
       print('ADDED TO LIST');
     }

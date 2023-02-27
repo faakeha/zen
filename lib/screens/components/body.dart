@@ -5,6 +5,8 @@ import 'package:zen/screens/components/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zen/screens/constants.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:zen/controllers/google_sign_provider.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -24,8 +26,8 @@ class Body extends StatelessWidget {
             //"assets/icons/chat.svg",
             //height: size.height * 0.45,
             //),
-            Lottie.network(
-                "https://assets5.lottiefiles.com/private_files/lf30_of3skn6w.json"),
+            //Lottie.network(
+            //  "https://assets5.lottiefiles.com/private_files/lf30_of3skn6w.json"),
             SizedBox(height: size.height * 0.05),
             RoundedButton(
               text: "LOGIN",
@@ -46,6 +48,16 @@ class Body extends StatelessWidget {
               color: Color.fromARGB(255, 187, 213, 246),
               textColor: Colors.black,
               press: () {},
+            ),
+            RoundedButton(
+              text: "SIGN UP With Google",
+              color: Color.fromARGB(255, 187, 213, 246),
+              textColor: Colors.black,
+              press: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.googleLogin();
+              },
             ),
           ],
         ),

@@ -11,7 +11,7 @@ const primaryColorPeachLight = Color(0xFFFBD1A2);
 const primaryColorBlueLight = Color(0xFF7DCFB6);
 const primaryColorBlue = Color(0xFF00B2CA);
 const primaryColorBlueDark = Color(0xFF1D4E89);
-const kPrimaryColor = Color(0xFF6F35A5);
+const kPrimaryColor = Color(0xFF5d5ed2);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
 
 const double defaultPadding = 16.0;

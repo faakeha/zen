@@ -24,6 +24,7 @@ class _FlChartPageState extends State<FlChartPage> {
   void initState() {
     // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((_) async => {
+      await context.read<FlChartPageProvider>().getUser(),
       await context.read<FlChartPageProvider>().scoreTotal()
     });
   }
@@ -176,7 +177,7 @@ class _FlChartPageState extends State<FlChartPage> {
                           return const Text(" ");
                         }))),
             maxX: 8,
-            maxY: 30,
+            maxY: 50,
             minX: 0,
             minY: 0,
             lineBarsData: [

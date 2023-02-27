@@ -1,8 +1,10 @@
 class Question {
-  final String questionText;
-  final List<Answer> answersList;
+   String questionText = '';
+   List<Answer> answersList = [];
+  List<int> answers2List = [];
 
   Question(this.questionText, this.answersList);
+  Question._(this.questionText, this.answers2List);
 }
 
 class Answer {
@@ -11,6 +13,7 @@ class Answer {
 
   Answer(this.answerText, this.score);
 }
+
 
 List<Question> getSymptomQuestions() {
   List<Question> list = [
@@ -180,21 +183,21 @@ List<Question> getSymptomQuestions() {
 
   return list;
 }
-// List<Question> getPerformanceQuestions() {
-//   List<Question> list = [
-//     Question("1. Overall school performance",),
-//     Question("2. Reading",),
-//     Question("3. Writing",),
-//     Question("4. Mathematics",),
-//     Question("5. Relationship with Parents",),
-//     Question("6. Relationship with Siblings",),
-//     Question("7. Relationship with Peers",),
-//     Question("8. Participation in organized activities (eg, teams)",),
+List<Question> getPerformanceQuestions() {
+  List<Question> list = [
+    Question._("1. Overall school performance", [1,2,3,4]),
+    Question._("2. Reading", [1,2,3,4]),
+    Question._("3. Writing",[1,2,3,4]),
+    Question._("4. Mathematics", [1,2,3,4]),
+    Question._("5. Relationship with Parents", [1,2,3,4]),
+    Question._("6. Relationship with Siblings", [1,2,3,4]),
+    Question._("7. Relationship with Peers", [1,2,3,4]),
+    Question._("8. Participation in organized activities (eg, teams)", [1,2,3,4]),
 
-//   ];
-//   return list;
+  ];
+  return list;
 
-// }
+}
 /* [
       Answer("Never", 0),
       Answer("Occasionally", 1),

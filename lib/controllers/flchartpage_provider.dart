@@ -25,13 +25,16 @@ class FlChartPageProvider with ChangeNotifier {
     List<double> symptoms_total = [];
 
     List<AssessmentJson> x1;
-    x1 = await repo.getList();
-    for (var item in x1) {
-      print(item.symptomsTotal.toString());
-      symptoms_total.add(item.symptomsTotal);
+    x1 = _user.assessments;
+    print('${_user.assessments.length} LENGTH OF ASSESSMENTS');
+    if(x1.isNotEmpty) {
+      for (var item in x1) {
+        print(item.symptomsTotal.toString());
+        symptoms_total.add(item.symptomsTotal);
+      }
+      _scoreTotals = symptoms_total;
+      notifyListeners();
     }
 
-    _scoreTotals = symptoms_total;
-    notifyListeners();
   }
 }
