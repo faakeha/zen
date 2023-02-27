@@ -10,10 +10,8 @@ class Question {
 class Answer {
   String answerText = "";
   int score = 0;
-  int answer = 0;
 
   Answer(this.answerText, this.score);
-  Answer._(this.answer, this.score);
 }
 
 List<Question> getSymptomQuestions() {
@@ -188,52 +186,52 @@ List<Question> getSymptomQuestions() {
 List<Question> getPerformanceQuestions() {
   List<Question> list = [
     Question("1. Overall school performance", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
     Question("2. Reading", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
     Question("3. Writing", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
     Question("4. Mathematics", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
     Question("5. Relationship with Parents", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
     Question("6. Relationship with Siblings", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
     Question("7. Relationship with Peers", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
     Question("8. Participation in organized activities (eg, teams)", [
-      Answer._(1, 1),
-      Answer._(2, 2),
-      Answer._(3, 3),
-      Answer._(4, 4),
+      Answer("1", 1),
+      Answer("2", 2),
+      Answer("3", 3),
+      Answer("4", 4),
     ]),
   ];
   return list;
