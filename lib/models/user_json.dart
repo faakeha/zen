@@ -5,21 +5,21 @@ import 'package:zen/models/medication_json.dart';
 
 class UserJson {
   String? id;
-  String? firstName;
-  String? lastName;
+  String firstName;
+  String lastName;
   String? email;
-  String? mobileNo;
-  String? childName;
-  String? childAge;
-  String? childGender;
-  List<String>? favblog = [];
-  List<MedicationJson>? medications = [];
-  List<AppointmentJson>? appointments = [];
-  List<AssessmentJson>? assesments = [];
-  List<ActivityJson>? activities = [];
+  String mobileNo;
+  String childName;
+  String childAge;
+  String childGender;
+  List<String> favouriteBlogs = [];
+  List<MedicationJson> medications = [];
+  List<AppointmentJson> appointments = [];
+  List<AssessmentJson> assessments = [];
+  List<ActivityJson> activities = [];
 
   UserJson(
-      {required this.id,
+      {this.id,
       required this.firstName,
       required this.lastName,
       required this.email,
@@ -27,29 +27,76 @@ class UserJson {
       required this.childName,
       required this.childAge,
       required this.childGender,
-      this.favblog,
-      this.appointments,
-      this.assesments,
-      this.activities});
+      required this.favouriteBlogs,
+      required this.medications,
+      required this.appointments,
+      required this.assessments,
+      required this.activities});
 
-  static UserJson fromJson(Map<String, dynamic> json, String id) => UserJson(
-        id: id,
-        firstName: json["firstName"] as String? ?? '',
-        lastName: json["lastName"] as String? ?? '',
-        email: json["email"] as String? ?? '',
-        mobileNo: json["mobileNo"] as String? ?? '',
-        childName: json["childName"] as String? ?? '',
-        childAge: json["childAge"] as String? ?? '',
-        childGender: json["childGender"] as String? ?? '',
-        favblog: List<String>.from(json["favblog"].map((x) => x)),
-        appointments:
-            List<AppointmentJson>.from(json["appointments"].map((x) => x)),
-        assesments: List<AssessmentJson>.from(json["assesments"].map((x) => x)),
-        activities: List<ActivityJson>.from(json["activities"].map((x) => x)),
+  UserJson.empty()
+      : firstName = '',
+        lastName = '',
+        email = '',
+        mobileNo = '',
+        childName = '',
+        childAge = '',
+        childGender = '';
+
+  UserJson copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? mobileNo,
+    String? childName,
+    String? childAge,
+    String? childGender,
+    List<String>? favouriteBlogs,
+    List<AssessmentJson>? assessments,
+    List<MedicationJson>? medications,
+    List<AppointmentJson>? appointments,
+    List<ActivityJson>? activities,
+  }) =>
+      UserJson(
+        id: id ?? this.id,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        email: email ?? this.email,
+        mobileNo: mobileNo ?? this.mobileNo,
+        childAge: childAge ?? this.childAge,
+        childName: childName ?? this.childName,
+        childGender: childGender ?? this.childGender,
+        favouriteBlogs: favouriteBlogs ?? this.favouriteBlogs,
+        assessments: assessments ?? this.assessments,
+        medications: medications ?? this.medications,
+        appointments: appointments ?? this.appointments,
+        activities: activities ?? this.activities,
       );
 
+  static UserJson fromJson(Map<String, dynamic> json, String id) {
+    return UserJson(
+      id: id,
+      firstName: json["firstName"] as String? ?? '',
+      lastName: json["lastName"] as String? ?? '',
+      email: json["email"] as String? ?? '',
+      mobileNo: json["mobileNo"] as String? ?? '',
+      childName: json["childName"] as String? ?? '',
+      childAge: json["childAge"] as String? ?? '',
+      childGender: json["childGender"] as String? ?? '',
+      favouriteBlogs: List<String>.from(json["favouriteBlogs"].map((x) => x)),
+      medications: List<MedicationJson>.from(
+          json["medications"].map((x) => MedicationJson.fromJson(x, id))),
+      appointments: List<AppointmentJson>.from(
+          json["appointments"].map((x) => AppointmentJson.fromJson(x, id))),
+      assessments: List<AssessmentJson>.from(
+          json["assessments"].map((x) => AssessmentJson.fromJson(x))),
+      activities: List<ActivityJson>.from(
+          json["activities"].map((x) => ActivityJson.fromJson(x, id))),
+    );
+  }
+
   Map<String, dynamic> toJson() => {
-        "id": id,
+        // "id": id,
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
@@ -57,9 +104,10 @@ class UserJson {
         "childName": childName,
         "childAge": childAge,
         "childGender": childGender,
-        "favblog": favblog,
-        "appointments": appointments,
-        "assesments": assesments,
-        "activities": activities
+        "favouriteBlogs": List<dynamic>.from(favouriteBlogs.map((e) => e)),
+        "medications": List<dynamic>.from(medications.map((e) => e.toJson())),
+        "appointments": List<dynamic>.from(appointments.map((e) => e.toJson())),
+        "assessments": List<dynamic>.from(assessments.map((e) => e.toJson())),
+        "activities": List<dynamic>.from(activities.map((e) => e.toJson())),
       };
 }

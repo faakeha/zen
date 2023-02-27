@@ -7,44 +7,45 @@ import 'package:zen/controllers/assessment_provider.dart';
 import 'package:zen/models/assessment_json.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:zen/screens/assessment/performance.dart';
 
 import '../../controllers/assessment_provider.dart';
 import '../../models/assessment_json.dart';
 import '../../repositories/assessment_repo.dart';
 import 'components/question_model.dart';
 
-class Assessment extends StatefulWidget {
-  const Assessment({Key? key}) : super(key: key);
+class Performance extends StatefulWidget {
+  Performance({Key? key, required this.assessment}) : super(key: key);
 
+  AssessmentJson assessment;
   @override
-  State<Assessment> createState() => _AssessmentState();
+  State<Performance> createState() => _PerformanceState();
 }
 
-class _AssessmentState extends State<Assessment> {
-  List<Question> questionList = getSymptomQuestions();
+class _PerformanceState extends State<Performance> {
+  List<Question> questionList = getPerformanceQuestions();
   int currentQuestionIndex = 0;
   double final_score = 0.0;
   List<int> scores = [];
   //Future<List<AssessmentJson>> json_list = [] as Future<List<AssessmentJson>>;
   Answer? selectedAnswer;
-  final List<Answer> answerListSymptoms = [
-    Answer("Never", 0),
-    Answer("Occasionally", 1),
-    Answer("Often", 2),
-    Answer("Very Often", 3),
-  ];
+  // final List<Answer> answerListPerformance = [
+  //   Answer.withoutText(1, 1),
+  //   Answer.withoutText(2, 2),
+  //   Answer.withoutText(3, 3),
+  //   Answer.withoutText(4, 4),
+  // ];
 
   @override
   void initState() {
     // TODO: implement initState
-    WidgetsBinding.instance.addPostFrameCallback((_) async =>
-        {await context.read<AssessmentProvider>().getUser()});
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) async => {await context.read<AssessmentProvider>().getUser()});
   }
 
   @override
   Widget build(BuildContext context) {
-    print('IN WIDGET${context.watch<AssessmentProvider>().user.id}');
+    print('TOTAL SYMPTOMS ${widget.assessment.symptomsTotal}');
+    widget.assessment.performanceResponse = scores;
     List<AssessmentJson> list = context.watch<AssessmentProvider>().json_list;
     // bool change = context.watch<AssessmentProvider>().change;
 
@@ -55,9 +56,9 @@ class _AssessmentState extends State<Assessment> {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           const Text(
-            "Symptoms",
+            "Performance",
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 24,
             ),
           ),
@@ -143,18 +144,13 @@ class _AssessmentState extends State<Assessment> {
     );
   }
 
-  Future<AssessmentJson> _saveScores() async {
+  Future<void> _saveScores() async {
     final scoresList = scores;
+    widget.assessment.performanceResponse = scoresList;
+    widget.assessment.performanceAverage = final_score / scoresList.length;
+    print(widget.assessment.performanceAverage);
 
-    AssessmentJson aj = AssessmentJson(
-        symptomsResponse: scores,
-        performanceResponse: [],
-        symptomsTotal: final_score,
-        performanceAverage: 0,
-        date: DateTime.now());
-
-    return aj;
-    // context.read<AssessmentProvider>().addAssessment(aj);
+    context.read<AssessmentProvider>().addAssessment(widget.assessment);
     // FirebaseFirestore.instance.collection("Assessment").add(aj.toJson());
   }
 
@@ -188,14 +184,13 @@ class _AssessmentState extends State<Assessment> {
           primary: Colors.blueAccent,
           onPrimary: Colors.white,
         ),
-        onPressed: () async {
+        onPressed: () {
           if (isLastQuestion) {
             //display score
             print(final_score);
             // context.read<AssessmentProvider>().setChange();
             //_tryButton();
-            AssessmentJson aj = await _saveScores();
-             Navigator.of(context).push(MaterialPageRoute(builder: (context) => Performance(assessment: aj,)));
+            _saveScores();
             // showDialog(context: context, builder: (_) => _showScoreDialog());
           } else {
             //scores.add(selectedAnswer!.score);

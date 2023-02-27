@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zen/screens/constants.dart';
 
-class RoundedButton extends StatelessWidget {
+class RoundedButton extends StatefulWidget {
   final String text;
   final VoidCallback press;
   final Color color, textColor;
@@ -14,6 +14,11 @@ class RoundedButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<RoundedButton> createState() => _RoundedButtonState();
+}
+
+class _RoundedButtonState extends State<RoundedButton> {
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
@@ -23,14 +28,14 @@ class RoundedButton extends StatelessWidget {
           child: TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                backgroundColor: color,
+                backgroundColor: widget.color,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(29)),
               ),
-              onPressed: press,
+              onPressed: widget.press,
               child: Text(
-                text,
-                style: TextStyle(color: textColor),
+                widget.text,
+                style: TextStyle(color: widget.textColor),
               ))),
     );
   }

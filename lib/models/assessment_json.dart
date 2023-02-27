@@ -26,7 +26,7 @@ class AssessmentJson {
             List<int>.from(json["symptomsResponse"].map((x) => x)),
         performanceResponse:
             List<int>.from(json["performanceResponse"].map((x) => x)),
-        symptomsTotal: json["symptomsTotal"],
+        symptomsTotal: json["symptomsTotal"].toDouble(),
         performanceAverage: json["performanceAverage"],
         date: (json["date"] as Timestamp).toDate(),
       );
