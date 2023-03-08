@@ -19,9 +19,11 @@ class _BlogsState extends State<Blogs> {
     // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((_) async =>
     {
-       await context.read<BlogsProvider>().setIsFetching(true),
+      await context.read<BlogsProvider>().getUser(),
+      await context.read<BlogsProvider>().setIsFetching(true),
        //context.read<BlogsProvider>().setChangedCategories(),
        await context.read<BlogsProvider>().getBlogsList(),
+       await context.read<BlogsProvider>().getFavouriteBlogs(),
        // await context.read<BlogsProvider>().getCategories(),
         await context.read<BlogsProvider>().setBlogs(),
        await context.read<BlogsProvider>().setIsFetching(false),
@@ -33,6 +35,7 @@ class _BlogsState extends State<Blogs> {
 
     // List<String> categories = context.watch<BlogsProvider>().categories;
     Map<String, List<BlogJson>> list = context.watch<BlogsProvider>().flist;
+    List<BlogJson> favList = context.watch<BlogsProvider>().favouriteBlogs;
 
     return Scaffold(
       appBar: AppBar(title: Text("Blogs")),
@@ -57,6 +60,9 @@ class _BlogsState extends State<Blogs> {
                     context.read<BlogsProvider>().setSearchItem(text);
                     context.read<BlogsProvider>().getFilteredBlogs();
                   }
+                  else{
+                    context.read<BlogsProvider>().setBlogs();
+                  }
 
                 },
                 onChanged: (String text){
@@ -64,13 +70,17 @@ class _BlogsState extends State<Blogs> {
                     context.read<BlogsProvider>().setSearchItem(text);
                      context.read<BlogsProvider>().getFilteredBlogs();
                   }
+                  else{
+                    context.read<BlogsProvider>().setBlogs();
+                  }
                 },
               ),
             ),
           ),
+          // BlogCategory(category: "Favourites", blogs: favList,),
           Expanded(
             child: ListView(
-              children: list.entries.map((e) => BlogCategory(category: e.key, blogs: e.value,)).toList()
+              children: list.entries.map((e) => e.key == "Favourites" ? BlogCategory(category: e.key, blogs: favList,) : BlogCategory(category: e.key, blogs: e.value,)).toList()
             ),
           ),
         ],

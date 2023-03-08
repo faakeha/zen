@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:zen/controllers/flchartpage_provider.dart';
@@ -37,8 +40,29 @@ void main() async {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late StreamSubscription<User?> user;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    user = FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
+  }
 
   // This widget is the root of your application.
   @override
@@ -50,7 +74,7 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColorPeach,
         scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
-      home: WelcomeScreen(),
+      home: Today(),
     );
   }
 }

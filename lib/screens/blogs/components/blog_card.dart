@@ -16,9 +16,31 @@ class BlogCard extends StatefulWidget {
 }
 
 class _BlogCardState extends State<BlogCard> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async =>
+    {
+    });
+  }
   @override
   Widget build(BuildContext context) {
     bool isFetching = context.watch<BlogsProvider>().isFetching;
+    bool isBlogLiked = context.read<BlogsProvider>().getLiked(widget.blog.id);
+
+
+    Future<bool> onLikeButtonTapped(bool isLiked) async {
+      if(!isBlogLiked){
+        context.read<BlogsProvider>().onTappedLike(widget.blog.id);
+      }
+      else{
+        context.read<BlogsProvider>().onTappedUnlike(widget.blog.id);
+      }
+
+      return !isLiked;
+    }
 
     return isFetching ?
     SizedBox(
@@ -80,6 +102,8 @@ class _BlogCardState extends State<BlogCard> {
                   top: 0,
                   right: 0,
                   child: LikeButton(
+                    isLiked: isBlogLiked,
+                    onTap: onLikeButtonTapped,
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     size: 35,

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:zen/controllers/today_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
+import 'package:zen/screens/blogs/blogs.dart';
 import 'package:zen/screens/constants.dart';
 import 'package:zen/screens/dashboard/dashboard.dart';
 import 'package:zen/screens/dashboard/linechart.dart';
@@ -51,10 +52,17 @@ class _TodayState extends State<Today> {
         ElevatedButton(
             onPressed: () {
               Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Blogs()));
+            },
+            child: Text('Blogs')),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => Assessment()));
             },
             child: Text('Log symptoms')),
         FlChartPage(),
+
       ]),
     );
   }

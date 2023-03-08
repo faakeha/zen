@@ -1,13 +1,13 @@
 class BlogJson {
-  String? id;
-  String title;
-  String category;
-  String link;
-  String image;
+  final String id;
+  final String title;
+  final String category;
+  final String link;
+  final String image;
   int likes;
 
   BlogJson({
-    this.id,
+    required this.id,
     required this.title,
     required this.category,
     required this.link,
@@ -15,7 +15,7 @@ class BlogJson {
     required this.likes,
   });
 
-  //const BlogJson.empty() : id = '', title = '', category = '', link = '', image = '', likes = 0;
+  BlogJson.empty() : id = '', title = '', category = '', link = '', image = '', likes = 0;
 
   static BlogJson fromJson(Map<String, dynamic> json, String id) => BlogJson(
         id: id ?? '',
