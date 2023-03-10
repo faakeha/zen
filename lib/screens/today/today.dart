@@ -5,8 +5,9 @@ import 'package:zen/controllers/today_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
 import 'package:zen/screens/constants.dart';
-import 'package:zen/screens/dashboard/dashboard.dart';
-import 'package:zen/screens/dashboard/linechart.dart';
+
+import '../dashboard/performance_dashboard.dart';
+import '../dashboard/symptoms_dashboard.dart';
 
 class Today extends StatefulWidget {
   const Today({Key? key}) : super(key: key);
@@ -18,16 +19,15 @@ class Today extends StatefulWidget {
 class _TodayState extends State<Today> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
 
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async =>
-    {
-      await context.read<TodayProvider>().getUser(),
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) async => {
+          await context.read<TodayProvider>().getUser(),
+        });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class _TodayState extends State<Today> {
             },
             child: Text('Log symptoms')),
         FlChartPage(),
-
+        PerformanceDashboard(),
       ]),
     );
   }

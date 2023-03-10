@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:zen/controllers/flchartpage_provider.dart';
 import 'package:zen/controllers/today_provider.dart';
-import 'package:zen/screens/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:zen/controllers/check_in_provider.dart';
 import 'package:zen/controllers/complete_profile_provider.dart';
@@ -18,7 +17,6 @@ import 'package:zen/controllers/assessment_provider.dart';
 import 'package:zen/controllers/blogs_provider.dart';
 import 'package:zen/screens/assessment/assessment.dart';
 import 'package:zen/screens/blogs/blogs.dart';
-import 'package:zen/screens/dashboard/linechart.dart';
 import 'package:zen/screens/today/today.dart';
 import 'package:zen/controllers/signup_provider.dart';
 
@@ -41,7 +39,6 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-
   const MyApp({super.key});
 
   @override
