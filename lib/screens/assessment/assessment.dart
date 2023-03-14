@@ -31,8 +31,8 @@ class _AssessmentState extends State<Assessment> {
   @override
   void initState() {
     // TODO: implement initState
-    WidgetsBinding.instance.addPostFrameCallback((_) async =>
-        {await context.read<AssessmentProvider>().getUser()});
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) async => {await context.read<AssessmentProvider>().getUser()});
   }
 
   @override
@@ -123,14 +123,9 @@ class _AssessmentState extends State<Assessment> {
           onPrimary: isSelected ? Colors.white : Colors.black,
         ),
         onPressed: () {
-          if (selectedAnswer == null) {
-            final_score += answer.score;
-            scores.add(answer.score);
-            //score++;
-            setState(() {
-              selectedAnswer = answer;
-            });
-          }
+          setState(() {
+            selectedAnswer = answer;
+          });
         },
       ),
     );
@@ -178,28 +173,34 @@ class _AssessmentState extends State<Assessment> {
         child: Text(isLastQuestion ? "Submit" : "Next"),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: selectedAnswer == null ? Colors.grey :Colors.blueAccent,
+          primary: selectedAnswer == null ? Colors.grey : Colors.blueAccent,
           onPrimary: Colors.white,
         ),
-
-        onPressed: selectedAnswer == null ? null : () async {
-          if (isLastQuestion) {
-            //display score
-            print(final_score);
-            // context.read<AssessmentProvider>().setChange();
-            //_tryButton();
-            AssessmentJson aj = await _saveScores();
-             Navigator.of(context).push(MaterialPageRoute(builder: (context) => Performance(assessment: aj,)));
-            // showDialog(context: context, builder: (_) => _showScoreDialog());
-          } else {
-            //scores.add(selectedAnswer!.score);
-            //next question
-            setState(() {
-              selectedAnswer = null;
-              currentQuestionIndex++;
-            });
-          }
-        },
+        onPressed: selectedAnswer == null
+            ? null
+            : () async {
+                if (isLastQuestion) {
+                  final_score += selectedAnswer?.score as double;
+                  scores.add(selectedAnswer?.score as int);
+                  //display score
+                  print(final_score);
+                  // context.read<AssessmentProvider>().setChange();
+                  //_tryButton();
+                  AssessmentJson aj = await _saveScores();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Performance(
+                            assessment: aj,
+                          )));
+                  // showDialog(context: context, builder: (_) => _showScoreDialog());
+                } else {
+                  //scores.add(selectedAnswer!.score);
+                  //next question
+                  setState(() {
+                    selectedAnswer = null;
+                    currentQuestionIndex++;
+                  });
+                }
+              },
       ),
     );
   }
