@@ -16,6 +16,10 @@ class FlChartPageProvider with ChangeNotifier {
 
   List<double> get scoreTotals => _scoreTotals;
 
+  List<double> _scoreAvg = [];
+
+  List<double> get scoreAvg => _scoreAvg;
+
   Future<void> getUser() async {
     _user = await _userRepository.getUser();
     notifyListeners();
@@ -27,7 +31,7 @@ class FlChartPageProvider with ChangeNotifier {
     List<AssessmentJson> x1;
     x1 = _user.assessments;
     print('${_user.assessments.length} LENGTH OF ASSESSMENTS');
-    if(x1.isNotEmpty) {
+    if (x1.isNotEmpty) {
       for (var item in x1) {
         print(item.symptomsTotal.toString());
         symptoms_total.add(item.symptomsTotal);
@@ -35,6 +39,21 @@ class FlChartPageProvider with ChangeNotifier {
       _scoreTotals = symptoms_total;
       notifyListeners();
     }
+  }
 
+  Future<void> PerformanceAvg() async {
+    List<double> performance_avg = [];
+
+    List<AssessmentJson> x1;
+    x1 = _user.assessments;
+    print('${_user.assessments.length} LENGTH OF ASSESSMENTS');
+    if (x1.isNotEmpty) {
+      for (var item in x1) {
+        print(item.performanceAverage.toString());
+        performance_avg.add(item.performanceAverage);
+      }
+      _scoreAvg = performance_avg;
+      notifyListeners();
+    }
   }
 }
