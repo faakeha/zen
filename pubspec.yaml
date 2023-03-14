@@ -98,7 +98,7 @@ flutter:
   fonts:
     - family:  MyFlutterApp
       fonts:
-        - asset: assets/icons/MyFlutterApp.ttf
+        - asset: assets/icons/Raleway.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
